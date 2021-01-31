@@ -1,17 +1,14 @@
 package com.eg.fcloud.webapp.service;
 
-import com.eg.fcloud.webapp.entity.User;
+import com.eg.fcloud.entity.User;
 import com.eg.fcloud.webapp.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -32,8 +29,8 @@ public class UserServiceTest {
     public void testAdd(){
         User user = new User();
         user.setAge(new Random(50).nextInt(30));
-        user.setUserName("zhaosi");
-        user.setUserCode("zhs");
+        user.setUserName("wangwu");
+        user.setUserCode("ww");
         userMapper.insert(user);
     }
 

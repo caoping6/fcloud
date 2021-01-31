@@ -3,7 +3,7 @@
 <mapper namespace="com.eg.fcloud.webapp.mapper.UserMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.eg.fcloud.webapp.entity.User">
+    <resultMap id="BaseResultMap" type="com.eg.fcloud.entity.User">
         <id column="id" property="id" />
         <result column="user_code" property="userCode" />
         <result column="user_name" property="userName" />

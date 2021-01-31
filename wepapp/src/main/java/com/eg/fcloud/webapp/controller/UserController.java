@@ -1,8 +1,8 @@
 package com.eg.fcloud.webapp.controller;
 
 
-import com.eg.fcloud.webapp.entity.User;
-import com.eg.fcloud.webapp.model.Response;
+import com.eg.fcloud.entity.User;
+import com.eg.fcloud.entity.Response;
 import com.eg.fcloud.webapp.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * <p>

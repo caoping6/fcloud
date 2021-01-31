@@ -1,7 +1,7 @@
 package com.eg.fcloud.webapp.service;
 
-import com.eg.fcloud.webapp.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.eg.fcloud.entity.User;
 
 /**
  * <p>

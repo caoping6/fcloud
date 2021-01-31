@@ -1,6 +1,6 @@
 package com.eg.fcloud.webapp.service.impl;
 
-import com.eg.fcloud.webapp.entity.User;
+import com.eg.fcloud.entity.User;
 import com.eg.fcloud.webapp.mapper.UserMapper;
 import com.eg.fcloud.webapp.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

@@ -7,7 +7,7 @@ server:
 spring:
   #redis集群
   redis:
-    host: 192.168.248.129
+    host: 192.168.24.129
     port: 6379
     timeout: 20000s
     #    集群环境打开下面注释，单机不需要打开
@@ -29,7 +29,7 @@ spring:
   datasource:
       # jdbc_config
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://192.168.248.129:3306/cloud?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://192.168.24.129:3306/cloud?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
       username: root
       password: 123456
       # Hikari
@@ -45,8 +45,6 @@ spring:
       max-file-size: 200MB
       # 最大请求大小
       max-request-size: 215MB
-  application:
-    name: web-app
 
 mybatis-plus:
   configuration:
@@ -65,11 +63,7 @@ logging:
   level:
     root: info
     com.eg: debug
-
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:7001/eureka
-
+    register-with-eureka: false
+    fetch-registry: false

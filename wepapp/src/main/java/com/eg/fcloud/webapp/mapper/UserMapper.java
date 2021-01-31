@@ -1,7 +1,7 @@
 package com.eg.fcloud.webapp.mapper;
 
-import com.eg.fcloud.webapp.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.eg.fcloud.entity.User;
 import org.springframework.stereotype.Repository;
 
 /**
