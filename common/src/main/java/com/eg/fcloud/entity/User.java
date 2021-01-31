@@ -1,16 +1,16 @@
-package com.eg.fcloud.webapp.entity;
+package com.eg.fcloud.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 // 先使用@ApiModel来标注类
 @ApiModel(value="用户登录表单对象",description="用户登录表单对象")
-public class User{
+public class User {
 
     private static final long serialVersionUID=1L;
 

@@ -1,4 +1,4 @@
-package com.eg.fcloud.webapp.model;
+package com.eg.fcloud.entity;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
  * @Description:
  */
 @Data
-public class Response {
+public class Response<T> {
     private static final int SUCCESS = 200;
 
     //状态码
@@ -16,7 +16,7 @@ public class Response {
     //返回信息
     private String message;
     //返回结果
-    private Object result;
+    private T result;
 
     public static Response build() {
         return new Response();
