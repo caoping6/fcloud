@@ -1,9 +1,7 @@
 package com.eg.fcloud.entity.exchange;
 
-import jdk.nashorn.internal.ir.IfNode;
-
-import java.net.SocketTimeoutException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: CAOPING
@@ -25,10 +23,22 @@ public class LCode {
 //        Solution2 solution2 = new Solution2();
 //        ListNode listNode = solution2.addTwoNumbers(l1, l2);
 //        System.out.println(listNode);
+//
+//        Solution3 solution3 = new Solution3();
+//        int size = solution3.lengthOfLongestSubstring("abcabcdadefjkl");
+//        System.out.println(size);
 
-        Solution3 solution3 = new Solution3();
-        int size = solution3.lengthOfLongestSubstring("abcabcdadefjkl");
-        System.out.println(size);
+//        Solution5 solution5 = new Solution5();
+//        int abaa = solution5.characterReplacement("ABAA", 0);
+//        System.out.println(abaa);
+
+        int a = 5;
+
+        double res = (double)a/2;
+        System.out.println(res);
+        Solution6 solution6 = new Solution6();
+        double me = solution6.findMedianSortedArrays(new int[]{1, 2}, new int[]{3,4});
+        System.out.println(me);
     }
 
 
@@ -120,6 +130,7 @@ class Solution4 {
             need.put(c, need.getOrDefault(c, 0) + 1);
         }
 
+
         int start  = 0;
         int left = 0;
         int len = Integer.MAX_VALUE;
@@ -150,5 +161,73 @@ class Solution4 {
 
         }
         return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
+    }
+}
+
+class Solution5 {
+    public int characterReplacement(String s, int k) {
+        int res = 0;
+        int left =0, right=0;
+        int max_freq= 0;
+        Map<Character,Integer> map = new HashMap();
+        for(int i = 0;i< s.length(); i++){
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+            max_freq = Math.max(max_freq, map.get(s.charAt(i)));
+
+            if(i - left + 1 -max_freq <= k){
+                res = Math.max(i - left + 1,res);
+            } else{
+                map.put(s.charAt(left), map.getOrDefault(s.charAt(left), 0) - 1);
+                left ++;
+            }
+        }
+
+        return res;
+    }
+}
+
+class Solution6 {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int length  = nums1.length + nums2.length;
+        int[] nums3 = new int[length];
+
+        int point1 = 0, point2 = 0;
+        int point3 =0;
+        while(true){
+            int a = 0;
+            int b = 0;
+            if(point1 < nums1.length){
+                a = nums1[point1];
+            }
+
+            if(point2 < nums2.length){
+                b = nums2[point2];
+            }
+
+            if((a < b && point1 < nums1.length) || (point2 == nums2.length && a > b)){
+                nums3[point3] = a;
+                point1 ++;
+            } else{
+                nums3[point3] = b;
+                point2 ++ ;
+            }
+
+            point3++;
+            if(point1 == nums1.length && point2 == nums2.length){
+                break;
+            }
+        }
+
+        double res = 0;
+        if(length  == 1){
+            return nums3[0];
+        }
+        if(length % 2 == 0){
+            res = (double)(nums3[length/2] + nums3[length/2 -1])/2;
+        } else{
+            res = nums3[length/2];
+        }
+
+        return res;
     }
 }
