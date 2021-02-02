@@ -41,8 +41,9 @@ public class LCode {
 //        System.out.println(me);
 
         Solution7 solution = new Solution7();
-        String str = solution.longestPalindrome("abaabcd");
+        String str = solution.longestPalindromeCenter("aa");
         System.out.println(str);
+
     }
 
 
@@ -231,26 +232,37 @@ class Solution7 {
         return s.substring(begin, len + begin);
     }
 
-    public String longestPalindromeDym(String s) {
-        char[] chars = s.toCharArray();
-        if (chars.length < 2) {
-            return s;
-        }
-        int len = 0;
-        int begin = 0;
-        // dp[i][j] 表示 s[i, j] 是否是回文串
-        boolean[][] dp = new boolean[len ][len];
-
-        for (int i = 0; i < chars.length; i++) {
-            for (int j = 0; j < chars.length; j++) {
-                int t = j-i+ 1;
-                if ( t > len && valid(chars, i, j)) {
-                    len = Math.max(len, j-i+ 1);
-                    begin = i;
+    public String longestPalindromeCenter(String s) {
+        if(s.length() < 2) return s;
+        int ll = 0, rr = 0, res = 0;
+        for(int i =0; i < s.length(); i ++){
+            int l = i - 1;
+            int r = i + 1;
+            while(l >= 0&& r < s.length()  && s.charAt(l) == s.charAt(r)){
+                int len = r -l + 1;
+                if(len > res){
+                    res = len;
+                    ll = l;
+                    rr = r;
                 }
+                l--;
+                r++;
+            }
+
+            l = i;
+            r = i+ 1;
+            while(l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)){
+                int len = r -l + 1;
+                if(len > res){
+                    res = len;
+                    ll = l;
+                    rr = r;
+                }
+                l--;
+                r++;
             }
         }
-        return s.substring(begin, len + begin);
+        return s.substring(ll,rr+1);
     }
 
     public boolean valid(char[] chars, int left, int right) {
