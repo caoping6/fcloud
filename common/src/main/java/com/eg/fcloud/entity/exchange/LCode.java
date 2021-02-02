@@ -32,13 +32,17 @@ public class LCode {
 //        int abaa = solution5.characterReplacement("ABAA", 0);
 //        System.out.println(abaa);
 
-        int a = 5;
+//        int a = 5;
+//
+//        double res = (double)a/2;
+//        System.out.println(res);
+//        Solution6 solution6 = new Solution6();
+//        double me = solution6.findMedianSortedArrays(new int[]{0, 0}, new int[]{0,0});
+//        System.out.println(me);
 
-        double res = (double)a/2;
-        System.out.println(res);
-        Solution6 solution6 = new Solution6();
-        double me = solution6.findMedianSortedArrays(new int[]{1, 2}, new int[]{3,4});
-        System.out.println(me);
+        Solution7 solution = new Solution7();
+        String str = solution.longestPalindrome("abaabcd");
+        System.out.println(str);
     }
 
 
@@ -188,46 +192,74 @@ class Solution5 {
 
 class Solution6 {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int length  = nums1.length + nums2.length;
-        int[] nums3 = new int[length];
+        int len  = nums1.length + nums2.length;
+        int p1 = 0, p2 = 0;
+        int left = 0, right = 0;
 
-        int point1 = 0, point2 = 0;
-        int point3 =0;
-        while(true){
-            int a = 0;
-            int b = 0;
-            if(point1 < nums1.length){
-                a = nums1[point1];
-            }
-
-            if(point2 < nums2.length){
-                b = nums2[point2];
-            }
-
-            if((a < b && point1 < nums1.length) || (point2 == nums2.length && a > b)){
-                nums3[point3] = a;
-                point1 ++;
-            } else{
-                nums3[point3] = b;
-                point2 ++ ;
-            }
-
-            point3++;
-            if(point1 == nums1.length && point2 == nums2.length){
-                break;
+        for (int i = 0; i <= len/2 ; i++) {
+            left = right;
+            if ((p2 >= nums2.length || nums1[p1] < nums2[p2]) && p1 < nums1.length) {
+                right = nums1[p1++];
+            } else {
+                right = nums2[p2++];
             }
         }
-
-        double res = 0;
-        if(length  == 1){
-            return nums3[0];
+        if (len % 2 == 0) {
+            return (left + right)/2.0;
         }
-        if(length % 2 == 0){
-            res = (double)(nums3[length/2] + nums3[length/2 -1])/2;
-        } else{
-            res = nums3[length/2];
-        }
+        return right;
+    }
+}
 
-        return res;
+class Solution7 {
+    public String longestPalindrome(String s) {
+        char[] chars = s.toCharArray();
+        if (chars.length < 2) {
+            return s;
+        }
+        int len = 0;
+        int begin = 0;
+        for (int i = 0; i < chars.length; i++) {
+            for (int j = 0; j < chars.length; j++) {
+                int t = j-i+ 1;
+                if ( t > len && valid(chars, i, j)) {
+                    len = Math.max(len, j-i+ 1);
+                    begin = i;
+                }
+            }
+        }
+        return s.substring(begin, len + begin);
+    }
+
+    public String longestPalindromeDym(String s) {
+        char[] chars = s.toCharArray();
+        if (chars.length < 2) {
+            return s;
+        }
+        int len = 0;
+        int begin = 0;
+        // dp[i][j] 表示 s[i, j] 是否是回文串
+        boolean[][] dp = new boolean[len ][len];
+
+        for (int i = 0; i < chars.length; i++) {
+            for (int j = 0; j < chars.length; j++) {
+                int t = j-i+ 1;
+                if ( t > len && valid(chars, i, j)) {
+                    len = Math.max(len, j-i+ 1);
+                    begin = i;
+                }
+            }
+        }
+        return s.substring(begin, len + begin);
+    }
+
+    public boolean valid(char[] chars, int left, int right) {
+        while (left < right) {
+            if (chars[left] != chars[right]) {
+                return false;
+            }
+            left ++; right--;
+        }
+        return true;
     }
 }
