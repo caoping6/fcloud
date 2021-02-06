@@ -5,10 +5,13 @@ import java.util.Map;
 
 public class Dym {
     public static void main(String[] args) {
-        SolutionD solutionD = new SolutionD();
-        int[] a = new int[]{4,2,1};
-        int i = solutionD.minCount(a);
-        System.out.println(i);
+//        SolutionD solutionD = new SolutionD();
+//        int[] a = new int[]{4,2,1};
+//        int i = solutionD.minCount(a);
+//        System.out.println(i);
+        SolutionL l = new SolutionL();
+        String s = l.longestPalindrome("babad");
+        System.out.println(s);
     }
 }
 
@@ -49,5 +52,44 @@ class SolutionD {
         }
 
         return dp[num];
+    }
+}
+
+class SolutionL {
+    public String longestPalindrome(String s) {
+        int len = s.length();
+        if(len < 2){
+            return s;
+        }
+        char[] ss = s.toCharArray();
+        boolean[][] dp = new boolean[len][len];
+
+        dp[0][0] = true;
+        int begin = 0;
+        int res = 0;
+        for(int i =0 ; i < len ; i++){
+            int ll = 0;
+            for(int j=i;j<len;j++){
+                if (i == 0 && j == 0){
+                    dp[i][j] = true;
+                }
+                else if(i ==0 && j == 1 && ss[i] == ss[j]){
+                    dp[i][j] = true;
+                    res = 2;
+                }
+                else if(i < j && ss[i] == ss[j]){
+                    dp[i][j] = dp[i + 1][j -1];
+                    if(dp[i][j]){
+                        if(j-i + 1 > res){
+                            res = j -1 + 1;
+                            begin = i;
+                        }
+                    }
+                } else{
+                    dp[i][j] = false;
+                }
+            }
+        }
+        return s.substring(begin,begin + res -1);
     }
 }
