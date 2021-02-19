@@ -1,7 +1,8 @@
 package com.eg.fcloud.entity.exchange;
 
-import java.util.HashMap;
-import java.util.Map;
+import lombok.val;
+
+import java.util.*;
 
 public class Dym {
     public static void main(String[] args) {
@@ -9,9 +10,14 @@ public class Dym {
 //        int[] a = new int[]{4,2,1};
 //        int i = solutionD.minCount(a);
 //        System.out.println(i);
-        SolutionL l = new SolutionL();
-        String s = l.longestPalindrome("babad");
-        System.out.println(s);
+//        SolutionL l = new SolutionL();
+//        String s = l.longestPalindrome("babad");
+//        System.out.println(s);
+        SolutionM m = new SolutionM();
+        String s = "()";
+        boolean valid = m.isValid(s);
+        System.out.println(valid);
+
     }
 }
 
@@ -56,6 +62,7 @@ class SolutionD {
 }
 
 class SolutionL {
+    //最长回文数
     public String longestPalindrome(String s) {
         int len = s.length();
         if(len < 2){
@@ -81,7 +88,7 @@ class SolutionL {
                     dp[i][j] = dp[i + 1][j -1];
                     if(dp[i][j]){
                         if(j-i + 1 > res){
-                            res = j -1 + 1;
+                            res = j -i + 1;
                             begin = i;
                         }
                     }
@@ -91,5 +98,31 @@ class SolutionL {
             }
         }
         return s.substring(begin,begin + res -1);
+    }
+}
+
+
+/**
+ * 有效的括号
+ */
+class SolutionM {
+//    private static final Map<Character,Character> map = new HashMap<Character,Character>(){{
+//        put('{','}'); put('[',']'); put('(',')'); put('?','?');
+//    }};
+    private  static final Map<Character, Character> map = new HashMap<Character, Character>(){{
+        put('{','}'); put('[',']'); put('(',')'); put('?','?');
+    }};
+    public boolean isValid(String s) {
+        if (s.length() % 2 != 0){return false;}
+        LinkedList<Character> list = new LinkedList();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (map.containsKey(c)) {
+                list.add(c);
+            } else if (list.size() == 0 || map.get(list.removeLast()) != c) {
+                return false;
+            }
+        }
+        return list.size() == 0;
     }
 }

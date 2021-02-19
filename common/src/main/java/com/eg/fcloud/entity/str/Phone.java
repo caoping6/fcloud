@@ -1,17 +1,15 @@
 package com.eg.fcloud.entity.str;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+
+import java.util.*;
 
 public class Phone {
     public static void main(String[] args) {
-        System.out.println('a');
-        System.out.println('A');
-        System.out.println(Integer.valueOf('A'));
-        System.out.println(Integer.valueOf('a'));
-        System.out.println(Integer.valueOf('0'));
-        System.out.println(Integer.valueOf('2'));
+        int index = "23".charAt(1) - (1+'0');
+        System.out.println(index);
+        Solution solution = new Solution();
+        List<String> strings = solution.letterCombinations("23");
+        System.out.println(strings.toString());
     }
 }
 
@@ -30,9 +28,42 @@ class Solution  extends LinkedHashMap {
             "wxyz"  //9
     };
 
-    private ArrayList<String> res = new ArrayList<>();
+    private List<String> res = new LinkedList<>();
 
+
+
+    //广度优先
     public List<String> letterCombinations(String digits) {
+        if(digits.length() == 0){
+            return res;
+        }
+        Double len = Math.pow(3, digits.length());
+        ArrayDeque<String> que = new ArrayDeque(len.intValue());
+
+        que.push("");
+        for(int i = 0; i < digits.length(); i++){
+            //遍历que 拼接当前字符
+            int index = digits.charAt(i) - '0';
+            String s = letterMap[index];
+            char[] arrs = s.toCharArray();
+            int size = que.size();
+            for(int j = 0; j < size; j ++ ){
+                String pop = que.pop();
+                for (char arr : arrs) {
+                    que.push(pop + arr);
+                }
+            }
+        }
+        if (que.size() > 1){
+            String[] resArrs = que.toArray(new String[len.intValue()]);
+            res = Arrays.asList(resArrs);
+        }
+        return res;
+    }
+
+
+    //深度优先  电话号码组合 leetcode:17
+    public List<String> letterCombinations2(String digits) {
         if(digits.length() == 0){
             return res;
         }

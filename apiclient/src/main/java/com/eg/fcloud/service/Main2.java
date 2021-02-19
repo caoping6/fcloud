@@ -1,51 +1,45 @@
 package com.eg.fcloud.service;
 
-import io.swagger.models.auth.In;
+import lombok.val;
 
 import java.util.*;
 
-public class Main {
+public class Main2 {
     public static void main(String[] args) {
-        int n = 5000;
-        int i = 0;
         Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String[] s = str.split(" ");
         List<String> list = new LinkedList<>();
-
-        while (sc.hasNextLine()){
-            String date = sc.nextLine();
-            list.add(date);
-            i++;
-            if(i >= n) break;
+        for (int i = 0; i < Integer.valueOf(s[0]); i++) {
+            list.add(s[i+1]);
         }
-        
-        
-        int res = 0;
-        Map<String, String> map = new HashMap<>();
-        for (String s : list) {
-            String[] split = s.split(".");
-            String pre = split[0];
-            String suf = split[1];
 
-            Integer value = map.get(pre) == null? null
-                    : Integer.valueOf(map.get(pre));
-
-            if(value == null){
-                map.put(pre, suf);
-            } else if(value.intValue() > Integer.valueOf(suf).intValue()){
-                map.put(pre, suf);
+        List<String> res = new ArrayList<>();
+        for (String s1 : list) {
+            if(null == s1 || "".equals(s1)) continue;
+            int start = 0, end = 8;
+            int length = s1.length()/8;
+            if (s1.length() % 8 > 0){
+               ++length;
             }
-        }
 
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            StringBuffer sb = new StringBuffer();
-            sb.append(entry.getKey()).append(".").append(entry.getValue());
-            for (int j = 0; j < list.size(); j++) {
-                if (sb.toString().equals(list.get(i))) {
-                    res ++;
+            for (int i = 0; i < length; i++) {
+                end = end > s1.length()? s1.length(): end;
+                String current = s1.substring(start, end);
+                while (current.length() < 8){
+                    current += "0";
                 }
+                res.add(current);
+                start +=8;
+                end += 8;
             }
-
         }
-        System.out.println(res);
+        String[] result  = new String[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            result[i] = res.get(i);
+        }
+        Arrays.sort(result);
+        System.out.println(String.join(" ", result));
     }
+
 }
