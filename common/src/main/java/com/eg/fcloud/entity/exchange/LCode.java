@@ -10,36 +10,41 @@ import java.util.Map;
  */
 public class LCode {
     public static void main(String[] args) {
-//        ListNode l1 = new ListNode(8);
-//        l1.next = new ListNode(9);
-//        l1.next.next = new ListNode(9);
-//
-//        ListNode l2 = new ListNode(8);
-//        l2.next = new ListNode(9);
-//        l2.next.next = new ListNode(9);
-//        l2.next.next.next = new ListNode(9);
-//        l2.next.next.next.next = new ListNode(9);
-//
-//        Solution2 solution2 = new Solution2();
-//        ListNode listNode = solution2.addTwoNumbers(l1, l2);
-//        System.out.println(listNode);
-//
-//        Solution3 solution3 = new Solution3();
-//        int size = solution3.lengthOfLongestSubstring("abcabcdadefjkl");
-//        System.out.println(size);
+        /**
+        ListNode l1 = new ListNode(8);
+        l1.next = new ListNode(9);
+        l1.next.next = new ListNode(9);
 
-//        Solution5 solution5 = new Solution5();
-//        int abaa = solution5.characterReplacement("ABAA", 0);
-//        System.out.println(abaa);
+        ListNode l2 = new ListNode(8);
+        l2.next = new ListNode(9);
+        l2.next.next = new ListNode(9);
+        l2.next.next.next = new ListNode(9);
+        l2.next.next.next.next = new ListNode(9);
 
-//        int a = 5;
-//
-//        double res = (double)a/2;
-//        System.out.println(res);
-//        Solution6 solution6 = new Solution6();
-//        double me = solution6.findMedianSortedArrays(new int[]{0, 0}, new int[]{0,0});
-//        System.out.println(me);
+        Solution2 solution2 = new Solution2();
+        ListNode listNode = solution2.addTwoNumbers(l1, l2);
+        System.out.println(listNode);
 
+        Solution3 solution3 = new Solution3();
+        int size = solution3.lengthOfLongestSubstring("abcabcdadefjkl");
+        System.out.println(size);
+
+        Solution5 solution5 = new Solution5();
+        int abaa = solution5.characterReplacement("ABAA", 0);
+        System.out.println(abaa);
+
+        int a = 5;
+
+        double res = (double)a/2;
+        System.out.println(res);
+        Solution6 solution6 = new Solution6();
+        double me = solution6.findMedianSortedArrays(new int[]{0, 0}, new int[]{0,0});
+        System.out.println(me);
+         */
+
+        Solution3 solution3 = new Solution3();
+        int size = solution3.lengthOfLongestSubstring("pwwkew");
+        System.out.println(size);
         Solution7 solution = new Solution7();
         String str = solution.longestPalindromeCenter("aa");
         System.out.println(str);
@@ -107,6 +112,9 @@ class Solution2 {
     }
 }
 
+/**
+ * 无重复字符的最长子串
+ */
 class Solution3 {
     public int lengthOfLongestSubstring(String s) {
         //abc abcd adefjkl
@@ -127,6 +135,9 @@ class Solution3 {
     }
 }
 
+/**
+ * s包含t的最小子串
+ */
 class Solution4 {
     public String minWindow(String s, String t) {
         Map<Character, Integer> need = new HashMap<>();
@@ -172,7 +183,7 @@ class Solution4 {
 class Solution5 {
     public int characterReplacement(String s, int k) {
         int res = 0;
-        int left =0, right=0;
+        int left =0;
         int max_freq= 0;
         Map<Character,Integer> map = new HashMap();
         for(int i = 0;i< s.length(); i++){
